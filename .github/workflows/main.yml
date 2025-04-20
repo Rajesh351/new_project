@@ -14,13 +14,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'  # Use latest LTS version of Node.js
+          node-version: 'lts/*'  # Latest LTS version of Node.js
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build React App
-        run: npm run build
+      # Optional: Run tests if available
+      # - name: Run tests
+      #   run: npm test
 
       - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
