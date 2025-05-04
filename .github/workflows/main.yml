@@ -1,27 +1,35 @@
-name: Build
-on: push
+name: Build and SonarQube Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   sonarqube:
     name: SonarQube Scan
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Required for accurate blame data in SonarQube
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 21
+          node-version: '21'  # Node 21 (latest), consider using 'lts/*' for stability
 
       - name: Install dependencies
         run: npm install
 
-      # Optional: Run tests if available
+      # Optional: Add tests with coverage
       # - name: Run tests
-      #   run: npm test
+      #   run: npm test -- --coverage
 
       - name: Run SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
