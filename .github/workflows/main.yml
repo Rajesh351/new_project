@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 'lts/*'  # Latest LTS version of Node.js
+          node-version: 21
 
       - name: Install dependencies
         run: npm install
